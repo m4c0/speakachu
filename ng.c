@@ -11,7 +11,21 @@ int main() {
   espeak_ng_InitializePath(data_path);
 
   espeak_ng_ERROR_CONTEXT context = NULL;
-  espeak_ng_CompilePhonemeData(22050, stdout, &context);
+
+  espeak_ng_STATUS result = espeak_ng_CompilePhonemeData(22050, stdout, &context);
+  if (result != ENS_OK) goto err;
+
+  result = espeak_ng_CompileIntonation(stdout, &context);
+  if (result != ENS_OK) goto err;
+
+  result = espeak_ng_CompileDictionary("espeak-ng/dictsource/", "en", stderr, 1, &context);
+  if (result != ENS_OK) goto err;
+
+  return 0;
+
+err:
+  espeak_ng_PrintStatusCodeMessage(result, stderr, context);
+  return 1;
 }
 
 #include "espeak-ng/src/libespeak-ng/compiledata.c"
