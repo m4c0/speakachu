@@ -3,7 +3,7 @@
 #pragma leco add_include_dir "espeak-ng/src/ucd-tools/src/include"
 
 #define HAVE_MKSTEMP 1
-#define PATH_ESPEAK_DATA "/tmp/phoneme"
+#define PATH_ESPEAK_DATA "out/share/data"
 
 #include "espeak-ng/src/libespeak-ng/common.c"
 #include "espeak-ng/src/libespeak-ng/mnemonics.c"
